@@ -1,0 +1,128 @@
+Resumao para a P1 ( antes tarde do que nunca )
+
+Definição de BD
+- Coleção de dados relacionados
+- Dados logicamente coerentes e com algum significado implícito
+- Projetado, construído e populado com um propósito
+- Representa algum aspecto do mundo real
+
+
+Dados tem uma ou mais origens definidas
+Algum nível de interação com eventos do mundo real
+
+
+Vamos trabalhar com o modelo relacional (baseado na teoria dos conjuntos )
+
+
+Esquema conceitual -> Deve apresentar uma visão de alto nível do banco.
+
+Independência física de dados -> Mudanças no esquema interno não refletem em mudanças no esquema conceitual
+
+
+
+Sobre Algebra Relacional
+
+Relação (tabela no SGBD ) é uma representação dos conceitos do mundo real
+
+Representa conjuntos (Automóveis, Professores, Espécie de Peixes)
+
+Tem um nome que é único
+
+Banco de dados é composto por um conjunto de relações
+
+Composto por uma lista de atributos simples e distintos que a qualificam
+
+
+Cada atributo representa uma característica do conceito (relação) sendo representado:
+Cor, Nome, Idade, ....
+
+Um atributo é definido por um nome e um domínio de valores que pode assumir
+
+
+O esquema de relação R, denotado por R(A1, A2, ..., An) é o conjunto de atributos R = {A1, A2, ..., An}
+
+É a definiçãio da estrutura da relação ( = nome + atributos)
+Ator (nome, idade, sexo)
+
+O grau de uma relação é o número de atributos que seu esquema contém.
+Automovel(marca, modelo, ano, cor) -> grau = 4
+
+
+
+
+Instância -> É o conjunto definido pelos elementos de uma relação -> suas tuplas:
+
+
+Ator| nome | idade | sexo
+     A      20          M
+     B      22          F
+     C      99          G
+
+As tuplas não estão ordenadas
+
+
+
+Atributo X tuplas
+
+Se um atributo é de um domínio em uma tupla, ele terá o mesmo domínio em todas as tuplas
+
+O valor Nulo foi criado para identificar a ausência de valor ou um valor desconhecido
+
+Unicidade
+- Cada tupla é única em uma instância
+- Elementos do mundo real diferem-se uns dos outros
+
+Super Chave
+- Conjunto de um ou mais atributos que possibilita identificar cada tupla unicamente
+
+Chave Candidata
+- Conjunto composto pelos atributos que são necessários e suficientes ( conjunto mínimo ) para distinguir
+cada elemento em uma relação
+
+Chave Primária
+Um dos conjuntos de chaves candidatas deve ser selecionado como chave primária
+Será utilizado para garantir a integridade referencial
+
+
+
+Integridade Referencial--
+
+Exclusão -> Define o que acontece em casos de exclusão de tuplas que sejam referenciadas por tuplas de outra tabela
+- 3 opções
+- Deletar as outras tuplas em cascata
+- Substituir por NULL o valor nas tuplas que fazem referências
+- Impedir a exclusão solicitada pelo usuário, forçando com que ele primeiro delete as outras tuplas que fazem
+referência a esta tupla que ele tinha a intenção de deletar
+
+
+
+
+
+
+Agora entrando de verdade em Álgebra Relacional
+
+4 Operações Básicas
+
+Produto Cartesiano, União e Diferença
+Seleção e Projeção
+
+
+Operações Estendidas
+Divisão
+Junção
+Interseção, etc
+
+
+Cada relação possui:
+Cardinalidade -> número de linhas da relação
+Grau          -> número de colunas da relação
+
+
+
+Lembrar dos símbolos:
+Seleção -> Sigma
+Projeção-> Pi
+Junção  -> A X B ( onde a = b)
+Renomear-> Lamed ( ou delta minúsculo)
+
+

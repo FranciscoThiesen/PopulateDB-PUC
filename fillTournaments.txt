@@ -1,0 +1,10 @@
+INSERT INTO torneio (id, nome) VALUES (1,'mtvrjfzipbihnitqnnzyubjs');
+INSERT INTO torneio (id, nome) VALUES (2,'pxaxfcvnqojljvegdpdckbcg');
+INSERT INTO torneio (id, nome) VALUES (3,'hkbjsrxeqjasnastsejuzcml');
+INSERT INTO torneio (id, nome) VALUES (4,'veuzkmecqiczhhapwynihbigjbdo');
+INSERT INTO torneio (id, nome) VALUES (5,'sjbeszsamfatsw');
+INSERT INTO torneio (id, nome) VALUES (6,'ldpdjlttlvsy');
+INSERT INTO torneio (id, nome) VALUES (7,'olphmpiagjmambenfsqmejgswebj');
+INSERT INTO torneio (id, nome) VALUES (8,'yckwuhabiubcjbjctb');
+INSERT INTO torneio (id, nome) VALUES (9,'udgpvjoekzuncptdydsbhvfmyzpn');
+INSERT INTO torneio (id, nome) VALUES (10,'szpqutfgehzfeohkzf');
