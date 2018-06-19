@@ -30,7 +30,7 @@ string generateBirthDate(int a, int b, int c) {
     string d = to_string(1 + c % 30);
     if(sz(m) == 1){ m += '0'; reverse(all(m));}
     if(sz(d) == 1){ d += '0'; reverse(all(d));}
-    string date = "\'"; date += y; date += '-'; date += m; date += '-'; date += d; date += '\'';
+    string date = "'"; date += y; date += '/'; date += m; date += '/'; date += d; date += "'";
     return date;
 }
 
@@ -55,7 +55,7 @@ string generateDate(int dia, int mes, int ano) {
     string d = to_string(dia);
     if(sz(m) == 1){ m += '0'; reverse(all(m));}
     if(sz(d) == 1){ d += '0'; reverse(all(d));}
-    string date = "\'"; date += y; date += '-'; date += m; date += '-'; date += d; date += '\'';
+    string date = "'"; date += y; date += '/'; date += m; date += '/'; date += d; date += "'";
     return date;
 }
 
@@ -102,7 +102,7 @@ int main() {
         vi nums(40);
         rep(k, 0, 40) nums[k] = dis(gen);
         string name = generateName(true, nums);
-        competidor << "INSERT INTO competidor (id, datanascimento, nome, sexo) VALUES(" << idCompetidorCorrente++ << "," << generateBirthDate(a,b,c) << "," << name << "," << (i / 500 == 0 ? "\'m\'" : "\'f\'" ) << ");" << endl;    
+        competidor << "INSERT INTO competidor (id, data_nascimento, nome, sexo) VALUES(" << idCompetidorCorrente++ << "," << "TO_DATE(" << generateBirthDate(a,b,c) << ", 'yyyy/mm/dd')" << "," << name << "," << (i / 500 == 0 ? "\'m\'" : "\'f\'" ) << ");" << endl;    
     }
     
     /*
@@ -160,15 +160,19 @@ int main() {
     
     // Estou tambem convencionando que todas as inscriçoes foram realizadas ate o 04/02/2018
     
-    int diaAtual = 5, mesAtual = 2, anoAtual = 2018;
-    
     // Vou aproveitar e ja selecionar aqui para cada prova os id's dos que vao se inscrever nela
     vector<vector<int> > individuosQueSeInscrevemNaProva(25);
     vector<vector<int> > gruposQueSeInscrevemNaProva(25); // so vai estar preenchido se for prova de grupo
 
     constexpr int gruposInscritosPorProva = 20;
     constexpr int individuosInscritosPorProva = 70;
+    
+    unordered_map<int, int> provasRealizadas;
 
+
+    int diaAtual = 0;
+    // Vamos para simplificar as coisas supor que estamos começando do mes de março.. E que todos os meses tem 30 dias e por motivos religiosos nenhuma bateria vai ocorrer no dia 31 de algum mes
+    int anoAtual = 2018; 
     rep(idProva, 1, 25) {
         string genero      = (idProva <= 12) ? "\'m\'" : "\'f\'";
         string comBarreira = (idProva % 2)   ? "\'1\'" : "\'0\'";
@@ -196,7 +200,11 @@ int main() {
         if(deGrupo == "\'1\'") {
             prova << "INSERT into prova (id, sexo, distancia, barreiras, grupo, data_final, data_semi) VALUES(";
             prova << idProva << ", " << genero << ", " << distancia << ", " << comBarreira << ", " << deGrupo << ", ";
-            prova << generateDate(diaAtual + 1, mesAtual, anoAtual) << ", " << generateDate(diaAtual, mesAtual, anoAtual) << ");" << endl;
+            while(provasRealizadas[diaAtual] >= 3 ) diaAtual++;
+            provasRealizadas[diaAtual]++;
+            provasRealizadas[diaAtual + 1]++;
+
+            prova  << "TO_DATE(" << generateDate( (diaAtual + 1) % 30 + 1, (diaAtual + 1) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate( diaAtual % 30 + 1, diaAtual / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ");" << endl;
             set<int> G; // vou usar set para num primeiro momento impedir que o mesmo time se cadastre 2x na mesma prova
             while(sz(G) < gruposInscritosPorProva ) {
                 int nxt = dis(gen) % 125;
@@ -220,10 +228,12 @@ int main() {
             }
         }
         else {
-            prova << "INSERT into prova (id, sexo, distancia, barreiras, grupo, data_final, data_semi, data_quarta, data_oitava) VALUES (";
+            prova << "INSERT into prova (id, sexo, distancia, barreiras, grupo, data_final, data_semi, data_quartas, data_oitavas) VALUES (";
             prova << idProva << ", " << genero << ", " << distancia << ", " << comBarreira << ", " << deGrupo << ", ";
-            prova << generateDate(diaAtual + 3, mesAtual, anoAtual) << ", " << generateDate(diaAtual + 2, mesAtual, anoAtual) << ", ";
-            prova << generateDate(diaAtual + 1, mesAtual, anoAtual) << ", " << generateDate(diaAtual, mesAtual, anoAtual) << ");" << endl;
+            while( provasRealizadas[diaAtual] >= 3) ++diaAtual;
+            rep(i, 0, 4) provasRealizadas[diaAtual]++;
+            prova << "TO_DATE(" << generateDate( (diaAtual + 3) % 30 + 1, (diaAtual + 3) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate( (diaAtual + 2) % 3 + 1, (diaAtual + 2) / 30 + 3 , anoAtual) << ", 'yyyy/mm/dd')" << ", ";
+            prova << "TO_DATE(" << generateDate( (diaAtual + 1) % 30 + 1, (diaAtual + 1) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate(diaAtual % 30 + 1, diaAtual / 30, anoAtual) << ");" << ", 'yyyy/mm/dd')" << endl;
             set<int> G;
             while(sz(G) < individuosInscritosPorProva ) {
                 int nxt = dis(gen) % 500;
