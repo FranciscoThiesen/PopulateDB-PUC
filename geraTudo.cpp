@@ -175,15 +175,15 @@ int main() {
     int anoAtual = 2018; 
     rep(idProva, 1, 25) {
         string genero      = (idProva <= 12) ? "\'m\'" : "\'f\'";
-        string comBarreira = (idProva % 2)   ? "\'1\'" : "\'0\'";
+        string comBarreira = (idProva % 2)   ? "1" : "0";
         string distancia;
-        string deGrupo     = "\'0\'";
-        if(idProva >= 1 && idProva <= 6) deGrupo = "\'1\'";
-        if(idProva >= 13 && idProva <= 18) deGrupo = "\'1\'";
+        string deGrupo     = "0";
+        if(idProva >= 1 && idProva <= 6) deGrupo = "1";
+        if(idProva >= 13 && idProva <= 18) deGrupo = "1";
 
-        if(idProva%3 == 1) distancia = "\'c\'";
-        else if(idProva%3 == 2) distancia = "\'m\'";
-        else distancia = "\'l\'";
+        if(idProva%3 == 1) distancia = "100";
+        else if(idProva%3 == 2) distancia = "200";
+        else distancia = "400";
         
         // Provas de grupo nao possuem oitavas ou quartas         
         
@@ -197,7 +197,7 @@ int main() {
          * Para fins de testes esse parametro pode ser alterado depois.
          */
 
-        if(deGrupo == "\'1\'") {
+        if(deGrupo == "1") {
             prova << "INSERT into prova (id, sexo, distancia, barreiras, grupo, data_final, data_semi) VALUES(";
             prova << idProva << ", " << genero << ", " << distancia << ", " << comBarreira << ", " << deGrupo << ", ";
             while(provasRealizadas[diaAtual] >= 3 ) diaAtual++;
