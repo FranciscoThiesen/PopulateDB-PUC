@@ -197,7 +197,7 @@ int main() {
          * Para fins de testes esse parametro pode ser alterado depois.
          */
 
-        if(deGrupo == "1") {
+        if(deGrupo == "0") {
             prova << "INSERT into prova (id, sexo, distancia, barreiras, grupo, data_final, data_semi) VALUES(";
             prova << idProva << ", " << genero << ", " << distancia << ", " << comBarreira << ", " << deGrupo << ", ";
             while(provasRealizadas[diaAtual] >= 3 ) diaAtual++;
