@@ -284,7 +284,7 @@ int main() {
     rep(idGrupo, 0, 250) {
         int t = 1 + ( dis(gen) % 5);
         double tempo = dis2(gen);
-        grupo_torneio << "INSERT into grupo_torneio (competidor, torneio, tempo) VALUES (" << idGrupo << "," << t << "," << tempo << ");" << endl;
+        grupo_torneio << "INSERT into grupo_torneio (grupo, torneio, tempo) VALUES (" << idGrupo << "," << t << "," << tempo << ");" << endl;
     }
     // Vou deixar comentado esse trecho de codigo que gera tempos para os competidores em torneios que n sao de ponta
     /*rep(idCompetidor, 0, 1000) {
