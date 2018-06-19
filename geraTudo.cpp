@@ -230,7 +230,7 @@ int main() {
             prova << idProva << ", " << genero << ", " << distancia << ", " << comBarreira << ", " << deGrupo << ", ";
             while( provasRealizadas[diaAtual] >= 3) ++diaAtual;
             rep(i, 0, 4) provasRealizadas[diaAtual]++;
-            prova << "TO_DATE(" << generateDate( (diaAtual + 3) % 30 + 1, (diaAtual + 3) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate( (diaAtual + 2) % 3 + 1, (diaAtual + 2) / 30 + 3 , anoAtual) << ", 'yyyy/mm/dd')" << ", ";
+            prova << "TO_DATE(" << generateDate( (diaAtual + 3) % 30 + 1, (diaAtual + 3) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate( (diaAtual + 2) % 30 + 1, (diaAtual + 2) / 30 + 3 , anoAtual) << ", 'yyyy/mm/dd')" << ", ";
             prova << "TO_DATE(" << generateDate( (diaAtual + 1) % 30 + 1, (diaAtual + 1) / 30 + 3, anoAtual) << ", 'yyyy/mm/dd')" << ", " << "TO_DATE(" << generateDate(diaAtual % 30 + 1, diaAtual / 30 + 3, anoAtual) << ", 'yyyy/mm/dd'));" << endl;
             set<int> G;
             while(sz(G) < individuosInscritosPorProva ) {
